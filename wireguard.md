@@ -27,3 +27,33 @@ Vai su *Client* e creane uno nuovo:
  - Dai un nome, specifica il `Numero del tunnel` e lascia tutto così come è. Ci penserà il plugin a aumentare l'adress e cambiare la Private Key. 
 
 Genera il QR o scarica la configurazione e scansionalo/importalo nell'app
+
+## Esempi:
+### Tunnel:
+
+[Interface]
+Address = 10.192.1.254/24
+
+SaveConfig = true
+ListenPort = 51800
+PrivateKey = easfasdasdasdaasf
+PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+[Peer]
+PublicKey = 8asfasfasfasfasfasfasf
+AllowedIPs = 10.192.1.1/32
+PresharedKey = o2asfasfasfasfasfasfasf
+
+
+
+### Client:
+[Interface]
+Address = 10.192.1.1/24
+PrivateKey = cBasdasdasdasdasd
+
+[Peer]
+PublicKey = suwasdasdasdasdasdasd
+PresharedKey = o2asdasdasdasdasdasda
+Endpoint = 186.25.47.100:51800
+AllowedIPs = 0.0.0.0/0
