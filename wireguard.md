@@ -28,9 +28,9 @@ Vai su *Client* e creane uno nuovo:
 
 Genera il QR o scarica la configurazione e scansionalo/importalo nell'app
 
-## Esempi:
+## Esempio su Linux:
 ### Tunnel:
-
+```bash 
 [Interface]
 Address = 10.192.1.254/24
 
@@ -44,10 +44,11 @@ PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACC
 PublicKey = 8asfasfasfasfasfasfasf
 AllowedIPs = 10.192.1.1/32
 PresharedKey = o2asfasfasfasfasfasfasf
-
+```
 
 
 ### Client:
+```bash 
 [Interface]
 Address = 10.192.1.1/24
 PrivateKey = cBasdasdasdasdasd
@@ -57,3 +58,36 @@ PublicKey = suwasdasdasdasdasdasd
 PresharedKey = o2asdasdasdasdasdasda
 Endpoint = 186.25.47.100:51800
 AllowedIPs = 0.0.0.0/0
+```
+
+
+## Installazione su Windows
+ - Installare il client ufficiale dal sito su entrambe le macchine.
+ - Cliccare su `aggiungi tunnel` in basso a sinistra
+    - avvia `wg-keygen.bat`
+    - inserire nella configurazione: 
+```bash 
+[Interface]
+PrivateKey = SERVER_PRIVATE_KEY
+Address = 10.0.0.1/24
+ListenPort = PORTA_PUBBLICA_SERVER
+
+[Peer]
+PublicKey = CLIENT_PUBLIC_KEY
+PresharedKey = PRESHARED_KEY
+AllowedIPs = 10.0.0.2/32
+```
+- e sul client:
+
+```bash 
+[Interface]
+PrivateKey = CLIENT_PRIVATE_KEY
+Address = 10.0.0.2/24
+
+[Peer]
+PublicKey = SERVER_PUBLIC_KEY
+PresharedKey = PRESHARED_KEY
+Endpoint = IP_PUBBLICO_SERVER:PORTA_PUBBLICA_SERVER
+AllowedIPs = 10.0.0.0/24
+PersistentKeepalive = 25
+```
