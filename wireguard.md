@@ -1,4 +1,4 @@
-# Installazione di TailScale per soluzione simil VPN
+# Installazione di Wireguard per soluzione simil VPN
 
 ## Cos'è WireGuard?
 
